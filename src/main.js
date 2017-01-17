@@ -12,9 +12,12 @@ import question from 'components/content/question'
 import apply from 'components/content/apply'
 import message from 'components/message/message'
 import about from 'components/about/about'
+import MintUi from 'mint-ui'
+import './libs/style.css'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
+Vue.use(MintUi)
 
 const routes = [
   {

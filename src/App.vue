@@ -4,8 +4,14 @@
       <router-link to='/all' tag='li'>全部</router-link>
       <router-link to='/marrow' tag='li'>精华</router-link>
       <router-link to='/about' tag='li'>关于</router-link>
-      <li @click='toggleDialog(true)'>更多</li>
+      <li @click='toggleDialog(true)'>more</li>
     </div>
+    <mt-header title="">
+      <router-link to="/" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </router-link>
+      <mt-button icon="more" slot="right"></mt-button>
+    </mt-header>
     <router-view></router-view>
     <div class="dialog" v-show='isShow'>
       <div class="return" @click='toggleDialog(false)'>
@@ -49,7 +55,7 @@ export default {
       lh-height(40px)
       border-npx(1px,red)
       li
-        flex: 1
+        width: 20%
         &.active
           color: #f20
     .dialog
