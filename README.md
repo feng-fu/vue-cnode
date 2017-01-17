@@ -1,6 +1,6 @@
 # vue-cnode
 
-> A Vue.js project
+> A Vue.js project base on cnode.org api
 
 ## Build Setup
 
