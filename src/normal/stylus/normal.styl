@@ -1,0 +1,35 @@
+lh-height($height)
+  height $height
+  line-height $height
+
+border-npx($height,$color)
+  position: relative
+  &:after
+    display block
+    content ''
+    width 100%
+    height $height
+    background-color $color
+    position: absolute
+    bottom: 0
+    left: 0
+ellipsis($width)
+    width: $width
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
+
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-npx
+    &:after
+      transform: scaleY(0.7)
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  border-npx
+    &:after
+      transform: scaleY(0.5)
+
+@media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+  border-npx
+    &:after
+      transform: scaleY(0.33)
