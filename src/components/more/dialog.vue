@@ -1,6 +1,11 @@
 <template>
   <div class="dialogdetail">
-    I am share
+    <mt-button type="primary">primary</mt-button>
+    <mt-button type="primary">primary</mt-button>
+    <mt-button type="primary">primary</mt-button>
+    <mt-button type="primary">primary</mt-button>
+    <mt-button type="primary">primary</mt-button>
+    <mt-button type="primary">primary</mt-button>
   </div>
 </template>
 
@@ -12,5 +17,8 @@
 
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-
+  .dialogdetail
+    display: flex
+    button
+      flex: 2
 </style>

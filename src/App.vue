@@ -6,16 +6,15 @@
       <router-link to='/about' tag='li'>关于</router-link>
       <li @click='toggleDialog(true)'>more</li>
     </div>
-    <mt-header title="">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
-      <mt-button icon="more" slot="right"></mt-button>
+    <mt-header title="全部">
+      <mt-button icon="more" slot="right" @click='toggleDialog(true)'></mt-button>
     </mt-header>
     <router-view></router-view>
     <div class="dialog" v-show='isShow'>
       <div class="return" @click='toggleDialog(false)'>
-        x
+        <router-link class="page-back router-link-active" to="/">
+          <mt-button icon="back"></mt-button>
+        </router-link>
       </div>
       <v-dialog></v-dialog>
     </div>
