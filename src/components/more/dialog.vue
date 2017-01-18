@@ -27,8 +27,16 @@
       </mt-cell>
     </ul>
     <div class="loginstate">
-      <mt-button type="danger" v-if="state">退出登录</mt-button>
-      <mt-button type="primary" v-else>登录</mt-button>
+      <mt-button type="danger" v-if="state" @click="quitLogin">
+        <img slot="icon" src="../../assets/quit.png" width="20" height="20">
+        退出
+      </mt-button>
+      <mt-button type="primary" v-else @click="login">
+        <img slot="icon" src="../../assets/login.png" width="20" height="20">
+        登录
+      </mt-button>
+
+
     </div>
   </div>
 </template>
@@ -39,6 +47,14 @@
     data () {
       return {
         state: false
+      }
+    },
+    methods: {
+      quitLogin () {
+        console.log(1)
+      },
+      login () {
+        console.log(this)
       }
     }
   }

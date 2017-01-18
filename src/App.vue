@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition-group name="list" tag="div">
+      <router-view></router-view>
+    </transition-group>
   </div>
 </template>
 
