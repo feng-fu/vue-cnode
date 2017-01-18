@@ -1,10 +1,15 @@
 # vue-cnode
 
 > A Vue.js project base on cnode.org api
+
 > 项目开发中，一个基于cnode社区api的vue 2.0应用
+
 > 主要依赖： vue-router／axios／mint-ui／marked
+
 > axios代替vue-resource成为一代新宠，不得不学
+
 > mint-ui作为新一代的UI库，基于vue深度定制，值得一用
+
 > 预期功能：
 > * 各模块贴子的浏览
 > * 登陆及退出
