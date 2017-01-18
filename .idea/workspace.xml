@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76fff3eb-b252-4f09-87d8-4029fc40da33" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.893417437d5b5f70abae9a87eb74c7bf.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.893417437d5b5f70abae9a87eb74c7bf.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.8c87e9f46713db646c1f.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.8c87e9f46713db646c1f.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.dd1343e2060a1b0227ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.dd1343e2060a1b0227ca.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.cdd516d7b16a5591305c.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.cdd516d7b16a5591305c.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/login/login.vue" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/static/css/reset.css" afterPath="$PROJECT_DIR$/dist/static/css/reset.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/more/dialog.vue" afterPath="$PROJECT_DIR$/src/components/more/dialog.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,10 +23,10 @@
       <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="52">
+              <caret line="2" column="54" lean-forward="false" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
               <folding>
-                <marker date="1484733658101" expanded="true" signature="177:248" ph="{&quot;name&quot;: 'app'...}" />
+                <marker date="1484734139790" expanded="true" signature="188:259" ph="{&quot;name&quot;: 'app'...}" />
               </folding>
             </state>
           </provider>
@@ -452,12 +439,12 @@
       <option name="presentableId" value="Default" />
       <updated>1484659761813</updated>
       <workItem from="1484659763438" duration="3150000" />
-      <workItem from="1484725432673" duration="8081000" />
+      <workItem from="1484725432673" duration="8725000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11231000" />
+    <option name="totallyTimeSpent" value="11875000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -498,7 +485,7 @@
         <state relative-caret-position="364">
           <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
           <folding>
-            <marker date="1484733658101" expanded="true" signature="177:248" ph="{&quot;name&quot;: 'app'...}" />
+            <marker date="1484734139790" expanded="true" signature="188:259" ph="{&quot;name&quot;: 'app'...}" />
           </folding>
         </state>
       </provider>
@@ -643,10 +630,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="52">
+          <caret line="2" column="54" lean-forward="false" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="54" />
           <folding>
-            <marker date="1484733658101" expanded="true" signature="177:248" ph="{&quot;name&quot;: 'app'...}" />
+            <marker date="1484734139790" expanded="true" signature="188:259" ph="{&quot;name&quot;: 'app'...}" />
           </folding>
         </state>
       </provider>
