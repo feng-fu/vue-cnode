@@ -58,18 +58,14 @@
       max-width: 100%
     .title
       text-align: center
-      font-size: 16px
-      font-weight: 600
-    .content
-      font-size: 12px
-      .markdown-text
-        a
-          color: #345
-          &:active
-            text-decortion: underline
+      font-size: 20px
+      font-weight: 700
+      margin-bottom: 15px
     .replies
+      margin-top: 20px
       li
         border-npx(1px,#ccc)
+        padding-bottom: 5px
         .author-msg
           lh-height(20px)
           img
