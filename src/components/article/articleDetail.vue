@@ -7,14 +7,14 @@
       {{content.title}}
       {{content.loginname}}
     </div>
-    <div class="content" v-html='content.content'></div>
+    <div class="markdown-body content" v-if="content.content" v-html='renderMarkdown(content.content)'></div>
     <ul v-if='content.replies' class='replies'>
       <li v-for='item in content.replies'>
         <div class="author-msg">
           <img :src="item.author.avatar_url" alt="replies-author">
           <span>{{item.author.loginname}}</span>
         </div>
-        <div class="replies-msg" v-html='item.content'>
+        <div class="replies-msg markdown-body" v-html='renderMarkdown(item.content)'>
         </div>
       </li>
     </ul>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+  import marked from 'marked'
   export default {
     data () {
       return {
@@ -29,21 +30,32 @@
       }
     },
     created () {
-      this.axios.get('https://cnodejs.org/api/v1/topic/' + this.$route.params.id.substr(1)).then((response) => {
+      this.axios.get('https://cnodejs.org/api/v1/topic/' + this.$route.params.id.substr(1) + '?mdrender=false').then((response) => {
         response = response.data
+        console.log(response)
         if (response.success === true) {
           this.content = response.data
         }
       }).catch(function (error) {
         console.log(error)
       })
+    },
+    methods: {
+      renderMarkdown (input) {
+        console.log(input)
+        return marked(input, { sanitize: true })
+      }
     }
   }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import '../../normal/stylus/normal'
+  @import "../../normal/style/markdown.css"
   .article
+    padding: 60px 5px 20px
+    img
+      max-width: 100%
     .title
       text-align: center
       font-size: 16px

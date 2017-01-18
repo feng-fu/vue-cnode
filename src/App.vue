@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <transition-group name="list" tag="div" keep-alive>
-      <router-view></router-view>
-    </transition-group>
+    <transition name="fade">
+      <router-view keep-alive></router-viewkeep-alive>
+    </transition>
   </div>
 </template>
 

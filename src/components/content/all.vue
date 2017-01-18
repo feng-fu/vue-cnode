@@ -1,7 +1,7 @@
 <template>
   <div class="all">
     <mt-header fixed title="全部">
-      <router-link tag="div" to="/dialog" slot="right">
+      <router-link tag="div" to="/dialog" slot="left">
         <mt-button icon="more"></mt-button>
       </router-link>
     </mt-header>
