@@ -14,12 +14,18 @@ import message from 'components/message/message'
 import about from 'components/about/about'
 import MintUi from 'mint-ui'
 import './libs/style.css'
+import articleDetail from 'components/article/articleDetail'
+import Dialog from 'components/more/dialog'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
 Vue.use(MintUi)
 
 const routes = [
+  {
+    path: '/',
+    component: all
+  },
   {
     path: '/all',
     component: all
@@ -47,6 +53,14 @@ const routes = [
   {
     path: '/about',
     component: about
+  },
+  {
+    path: '/topic/:id',
+    component: articleDetail
+  },
+  {
+    path: '/dialog',
+    component: Dialog
   }
 ]
 

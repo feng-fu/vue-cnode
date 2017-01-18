@@ -1,9 +1,14 @@
 <template>
   <div class="all">
-    <ul  v-if='message'>
-      <router-link tag='li' to='' v-for='item in message'>
+    <mt-header fixed title="全部">
+      <router-link tag="div" to="/dialog" slot="right">
+        <mt-button icon="more"></mt-button>
+      </router-link>
+    </mt-header>
+    <ul v-if='message'>
+      <router-link tag='li' :to="'/topic/:'+item.id" v-for='item in message'>
         <div class="title">
-          <span :class='getCategory(item.good, item.top, item.tab).className' v-html='getCategory(item.good, item.top, item.tab).str'></span>
+          <span :class='getCategory(item.good, item.top, item.tab).className' v-text='getCategory(item.good, item.top, item.tab).str'></span>
           {{item.title}}
         </div>
         <div class="detail">
@@ -43,6 +48,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import '../../normal/stylus/normal'
   .all
+    margin-top: 40px
     li
       width: 100%
       box-sizing: border-box
