@@ -1,6 +1,8 @@
 <template>
   <div class="about">
-    I am about
+    <mt-header fixed title="关于">
+      <mt-button icon="back" @click='$router.go(-1)' slot="left"></mt-button>
+    </mt-header>
   </div>
 </template>
 

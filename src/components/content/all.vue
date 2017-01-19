@@ -1,6 +1,6 @@
 <template>
   <div class="all">
-    <mt-header fixed title="全部">
+    <mt-header fixed :title="getTheme($route.params.id)">
       <router-link tag="div" to="/dialog" slot="left">
         <mt-button icon="more"></mt-button>
       </router-link>
@@ -28,7 +28,13 @@
       }
     },
     created () {
-      this.axios.get('https://cnodejs.org/api/v1/topics').then((response) => {
+      let page = 1
+      let category = ''
+      if (this.$route.params.id) {
+        category = '&tab=' + this.$route.params.id.substr(1)
+      }
+      this.axios.get('https://cnodejs.org/api/v1/topics' + '?limit=20&page=' + page + category).then((response) => {
+        page++
         response = response.data
         if (response.success === true) {
           this.message = response.data
@@ -38,6 +44,24 @@
       })
     },
     methods: {
+      getTheme (id) {
+        if (id === undefined) {
+          return '全部'
+        }
+        id = id.substr(1)
+        switch (id) {
+          case ('ask') :
+            return '问答'
+          case ('share') :
+            return '分享'
+          case ('job') :
+            return '招聘'
+          case ('good') :
+            return '精华'
+          default:
+            return '全部'
+        }
+      },
       getCategory (good, top, view) {
         return Utils.getCategory(good, top, view)
       }

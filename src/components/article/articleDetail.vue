@@ -5,7 +5,10 @@
     </mt-header>
     <div class="title">
       {{content.title}}
-      {{content.loginname}}
+    </div>
+    <div class="author clearfix" v-if="content.author">
+      <img :src="content.author.avatar_url" alt="avatar">
+      <span class="name">{{content.author.loginname}}</span>
     </div>
     <div class="markdown-body content" v-if="content.content" v-html='renderMarkdown(content.content)'></div>
     <ul v-if='content.replies' class='replies'>
@@ -32,7 +35,6 @@
     created () {
       this.axios.get('https://cnodejs.org/api/v1/topic/' + this.$route.params.id.substr(1) + '?mdrender=false').then((response) => {
         response = response.data
-        console.log(response)
         if (response.success === true) {
           this.content = response.data
         }
@@ -42,7 +44,6 @@
     },
     methods: {
       renderMarkdown (input) {
-        console.log(input)
         return marked(input, { sanitize: true })
       }
     }
@@ -72,4 +73,16 @@
             width: 20px
             height: 20px
             border-radius: 50%
+    .author
+      img
+        float: left
+        margin: 0 5px
+        width: 36px
+        height: 36px
+        border-radius: 50%
+      .name
+        display: block
+        float: left
+        margin: 10px 5px
+        color: #484848;
 </style>
