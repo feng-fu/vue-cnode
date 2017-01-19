@@ -58,12 +58,13 @@
     .main
       margin: 0 auto
       text-align: center
-      mint-cell
+      .mint-cell
         border: 1px solid #ccc
-      .mint-cell-wrapper
-        background-size: 0;
-        input
-          text-align: center
-    buttton
-      margin-top: 20px
+        border-radius: 5px
+        .mint-cell-wrapper
+          background-size: 0;
+          input
+            text-align: center
+      button
+        margin-top: 20px
 </style>
