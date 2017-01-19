@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76fff3eb-b252-4f09-87d8-4029fc40da33" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vue-cnode.iml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/article/articleDetail.vue" afterPath="$PROJECT_DIR$/src/components/article/articleDetail.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/login/login.vue" afterPath="$PROJECT_DIR$/src/components/login/login.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/utils.js" afterPath="$PROJECT_DIR$/src/libs/utils.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,16 +30,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1015">
               <caret line="35" column="61" lean-forward="false" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="message.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/message/message.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -68,6 +60,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="588">
               <caret line="67" column="8" lean-forward="false" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,7 +117,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="markdown.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="markdown.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/normal/style/markdown.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="406">
@@ -543,12 +545,12 @@
       <workItem from="1484749791279" duration="1276000" />
       <workItem from="1484789973302" duration="13261000" />
       <workItem from="1484833087211" duration="6000" />
-      <workItem from="1484833096221" duration="6646000" />
+      <workItem from="1484833096221" duration="6747000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35350000" />
+    <option name="totallyTimeSpent" value="35451000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="797" extended-state="6" />
@@ -843,14 +845,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/content/share.vue" />
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
@@ -981,6 +975,14 @@
           <folding>
             <element signature="e#50#2291#1" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
