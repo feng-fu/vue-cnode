@@ -29,6 +29,12 @@
         </li>
       </ul>
     </div>
+    <div class="bottom">
+      <mt-field placeholder="请留下您的评论...">
+        <img src="../../assets/pen.png" height="45px" width="45px">
+      </mt-field>
+      <mt-button type="default">default</mt-button>
+    </div>
   </div>
 </template>
 
@@ -143,4 +149,15 @@
     .content
       background-color: #fff
       padding: 30px 0
+    .bottom
+      position: fixed
+      bottom: 0
+      left: 0
+      width: 100%
+      display: flex
+      .mint-cell
+        flex: 4
+      button
+        flex: 1
+        height: 48px
 </style>

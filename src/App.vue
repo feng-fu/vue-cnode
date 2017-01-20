@@ -7,14 +7,14 @@
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      isShow: false
+  export default {
+    name: 'app',
+    data () {
+      return {
+
+      }
     }
   }
-}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

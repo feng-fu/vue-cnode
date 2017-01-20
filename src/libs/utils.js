@@ -24,7 +24,7 @@ exports.getIntervalTime = (time) => {
   if (timeNow >= 1) {
     return parseInt(timeNow) + '年前'
   } else if (timeNow * 365 / 30 >= 1) {
-    return parseInt(timeNow * 365 / 30) + '月前'
+    return parseInt(timeNow * 365 / 30) + '个月前'
   } else if (timeNow * 365 >= 1) {
     return parseInt(timeNow * 365) + '天前'
   } else if (timeNow * 365 * 24 >= 1) {
