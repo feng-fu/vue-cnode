@@ -13,7 +13,7 @@
         position="top"
         v-model="popupVisible"
         popup-transition="popup-fade">
-        登陆成功
+        {{loginResult}}
       </mt-popup>
     </div>
 
@@ -26,7 +26,8 @@
       return {
         accessToken: '',
         state: '',
-        popupVisible: false
+        popupVisible: false,
+        loginResult: ''
       }
     },
     methods: {
@@ -36,15 +37,23 @@
         }).then((response) => {
           response = response.data
           if (response.success === true) {
+            this.state = 'success'
+            this.loginResult = '登录成功'
             this.popupVisible = true
             setTimeout(() => {
               this.popupVisible = false
             }, 1000)
-            this.state = 'success'
+            console.log(this.$router)
+            this.$router.go(-1)
           }
         }).catch((error) => {
           console.log(error)
           this.state = 'error'
+          this.popupVisible = true
+          setTimeout(() => {
+            this.popupVisible = false
+          }, 1000)
+          this.loginResult = '登陆失败'
         })
       }
     }

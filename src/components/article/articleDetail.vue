@@ -94,6 +94,7 @@
     padding: 60px 5px 20px
     background-color: #f8f8f9
     min-height: 100%
+    margin-bottom: 40px
     img
       max-width: 100%
     .title

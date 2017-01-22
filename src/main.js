@@ -6,17 +6,14 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import all from 'components/content/all'
-// import marrow from 'components/content/marrow'
-// import share from 'components/content/share'
-// import question from 'components/content/question'
-// import apply from 'components/content/apply'
 import message from 'components/message/message'
 import about from 'components/about/about'
 import MintUi from 'mint-ui'
-import './libs/style.css'
 import articleDetail from 'components/article/articleDetail'
 import Dialog from 'components/more/dialog'
 import Login from 'components/login/login'
+import Person from 'components/person/person'
+import './libs/style.css'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
@@ -54,6 +51,10 @@ const routes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path: '/person',
+    component: Person
   }
 ]
 

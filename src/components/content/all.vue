@@ -4,6 +4,11 @@
       <router-link tag="div" to="/dialog" slot="left">
         <mt-button icon="more"></mt-button>
       </router-link>
+      <router-link tag="div" to="/person" slot="right">
+        <mt-button>
+          <img src="../../assets/head.png" alt="head" width="24px">
+        </mt-button>
+      </router-link>
     </mt-header>
     <ul v-if='message'>
       <router-link tag='li' :to="'/topic/:'+item.id" v-for='item in message'>
