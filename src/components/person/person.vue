@@ -2,6 +2,11 @@
   <div class="userDetail">
     <mt-header fixed title="个人中心">
       <mt-button icon="back" @click='$router.go(-1)' slot="left"></mt-button>
+      <router-link to="'/message">
+        <mt-button   slot="right">
+          <img src="../../assets/message.png" alt="message_center" width: 24px>
+        </mt-button>
+      </router-link>
     </mt-header>
     <div class="content" v-if="isLogin">
       <div class="header clearfix">
@@ -75,8 +80,7 @@
           position: absolute
           top: 0
           left: 0
-          background-image: linear-gradient( 180deg, #63a35c 0%, #e6c8c8 100%)
-          box-shadow: 0.5px 0.866px 10px 0px rgba(6, 131, 229, 0.5)
+          background-image: linear-gradient( 180deg, #dfdfdf 0%, #ededed 100%)
         img
           width: 100px
           height: 100px
@@ -94,7 +98,7 @@
             lh-height: 22px
       .container
         li
-          border-npx(1px,#ddd)
+          border-npx(1px,#f0f0f0)
           padding: 5px 5px 5px 10px
         img
           width: 30px
@@ -108,5 +112,4 @@
           lh-height: 40px
           &.last_repl
             float: right
-            color: #ccc
 </style>
