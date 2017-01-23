@@ -31,6 +31,7 @@ footer, header, menu, nav, section {
 
 body {
     line-height: 1;
+    font-family: SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
 }
 
 blockquote, q {
@@ -89,32 +90,8 @@ body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/*
-markdon生成html样式重写
-*/
-
-.markdown-text p,.preview p {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
-    line-height: 2em;
-    margin: 1em 0
-}
-
-.markdown-text>:last-child,.preview>:last-child,textarea#title {
-    margin-bottom: 1em;
-}
-
-.markdown-text>:first-child,.preview>:first-child {
-    margin-top: 0;
-}
-
-.markdown-text li,.preview li {
-    font-size: 14px;
-    line-height: 2em;
-}
-.markdown-text img {
-  width: 100%;
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
 }
