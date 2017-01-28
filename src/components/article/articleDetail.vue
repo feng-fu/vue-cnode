@@ -23,11 +23,18 @@
               <span class="author_name">{{item.author.loginname}}</span>
               <span class="show_time" v-if="item.create_at">{{getRecentDate(item.create_at)}}</span>
             </div>
+            <div class="good" :class="{click_good:click_good}" @click="addGood"></div>
           </div>
           <div class="replies-msg markdown-body" v-html='renderMarkdown(item.content)'>
           </div>
         </li>
       </ul>
+    </div>
+    <div class="bottom">
+      <mt-field placeholder="请留下您的评论...">
+        <img src="../../assets/pen.png" height="45px" width="45px" slot="left">
+      </mt-field>
+      <mt-button type="default">提交</mt-button>
     </div>
   </div>
 </template>
@@ -38,7 +45,8 @@
   export default {
     data () {
       return {
-        content: []
+        content: [],
+        click_good: false
       }
     },
     created () {
@@ -70,6 +78,10 @@
       },
       getRecentDate (date) {
         return Utils.getIntervalTime(date)
+      },
+      addGood () {
+        this.click_good = true
+        console.log(this)
       }
     }
   }
@@ -82,6 +94,7 @@
     padding: 60px 5px 20px
     background-color: #f8f8f9
     min-height: 100%
+    margin-bottom: 40px
     img
       max-width: 100%
     .title
@@ -116,6 +129,16 @@
               display: block
               line-height:17px
               color: #d9d9d9
+          .good
+            background-image: url(../../assets/good.png)
+            background-size: 20px
+            background-position: 0
+            margin: 10px 20px
+            width: 20px
+            height: 20px
+            float: right
+            &.click_good
+              background-url: url(../../assets/good_active.png)
     .author
       margin: 10px
       img
@@ -143,4 +166,15 @@
     .content
       background-color: #fff
       padding: 30px 0
+    .bottom
+      position: fixed
+      bottom: 0
+      left: 0
+      width: 100%
+      display: flex
+      .mint-cell
+        flex: 4
+      button
+        flex: 1
+        height: 48px
 </style>

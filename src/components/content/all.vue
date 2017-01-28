@@ -4,15 +4,25 @@
       <router-link tag="div" to="/dialog" slot="left">
         <mt-button icon="more"></mt-button>
       </router-link>
+      <router-link tag="div" to="/person" slot="right">
+        <mt-button>
+          <img src="../../assets/head.png" alt="head" width="24px">
+        </mt-button>
+      </router-link>
     </mt-header>
     <ul v-if='message'>
       <router-link tag='li' :to="'/topic/:'+item.id" v-for='item in message'>
-        <div class="title">
-          <span :class='getCategory(item.good, item.top, item.tab).className' v-text='getCategory(item.good, item.top, item.tab).str'></span>
-          {{item.title}}
+        <div class="title clearfix">
+          <img :src="item.author.avatar_url" alt="avatar">
+          <span>{{item.author.loginname}}</span>
+          <span class="date">{{getRecentTime(item.create_at)}}</span>
         </div>
         <div class="detail">
-          <img :src="item.author.avatar_url" alt="avatar">
+          {{item.title}}
+        </div>
+        <div class="operate clearfix">
+          <span class="view icon lside"></span><span class="view_text lside">{{item.visit_count}}</span>
+          <span class="reply icon lside"></span><span class="reply_text lside">{{item.reply_count}}</span>
         </div>
       </router-link>
     </ul>
@@ -62,8 +72,8 @@
             return '全部'
         }
       },
-      getCategory (good, top, view) {
-        return Utils.getCategory(good, top, view)
+      getRecentTime (date) {
+        return Utils.getIntervalTime(date)
       }
     }
   }
@@ -77,32 +87,45 @@
       width: 100%
       box-sizing: border-box
       padding: 0 10px
-      height: 60px
+      height: 110px
       border-npx(1px,#ccc)
       .title
+        img
+          width: 30px
+          height: 30px
+          margin: 5px
+          border-radius: 50%
+          float: left
+        span
+          display: block
+          float: left
+          margin: 0 10px
+          lh-height(40px)
+          color: #333;
+          &.date
+            color: #969696
+      .detail
+        display: block
         ellipsis(100%)
-        lh-height(24px)
+        lh-height(40px)
         font-size: 14px
+      .operate
+        margin: 0 5px
         span
           display: inline-block
-          border-radius: 2px
-          margin: 2px
-          padding: 0 3px
-          lh-height(20px)
-          color: #ffffff;
-          &.top
-            background: #E74C3C
-          &.ask
-            background: #3498DB
-          &.good
-            background: #E67E22
-          &.job
-            background: #9B59B6
-          &.share
-            background: #1ABC9C
-      .detail
-        img
-          width: 20px
-          height: 20px
-          border-radius: 50%
+          lh-height(25px)
+          color: #bfbfbf
+          &.lside
+            float: left
+            margin-right: 10px
+          &.icon
+            width: 25px
+            background-size: 25px
+            background-repeat: no-repeat
+            &.view
+              background-image: url(../../assets/view.png)
+            &.reply
+              background-image: url(../../assets/reply.png)
+
+
 </style>

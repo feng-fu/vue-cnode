@@ -1,7 +1,7 @@
 <template>
   <div class="dialog">
     <mt-header title="选择分类">
-      <mt-button icon="back" slot="left"  to="$router.go(-1)"></mt-button>
+      <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
     </mt-header>
     <ul class="main">
       <mt-cell title="首页" is-link to="/all">
