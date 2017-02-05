@@ -54,7 +54,8 @@
       }
     },
     created () {
-      let usr = store.getters.getLoginState.userName
+      let state = store.getters.getLoginState
+      let usr = state.userName
       this.axios.get('https://cnodejs.org/api/v1/user/' + usr).then((response) => {
         response = response.data
         if (response.success === true) {

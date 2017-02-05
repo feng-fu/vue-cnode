@@ -22,6 +22,7 @@
 
 <script>
   import Store from '../../store/store'
+  import { Toast } from 'mint-ui'
   var store = Store.store
   export default {
     data () {
@@ -34,7 +35,7 @@
     },
     methods: {
       login () {
-        console.log(Store)
+        console.log(this.MintUi)
         this.axios.post('https://cnodejs.org/api/v1/accesstoken', {
           accesstoken: this.accessToken
         }).then((response) => {
@@ -44,23 +45,18 @@
             store.commit('loginIn')
             store.commit('storeAccessToken', this.accessToken)
             store.commit('storeUserName', loginsname)
-            this.state = 'success'
-            this.loginResult = '登录成功'
-            this.popupVisible = true
-            setTimeout(() => {
-              this.popupVisible = false
-            }, 1000)
-            console.log(this.$router)
+            Toast({
+              message: '登录成功',
+              iconClass: 'icon icon-success'
+            })
             this.$router.go(-1)
           }
         }).catch((error) => {
           console.log(error)
-          this.state = 'error'
-          this.popupVisible = true
-          setTimeout(() => {
-            this.popupVisible = false
-          }, 1000)
-          this.loginResult = '登陆失败'
+          Toast({
+            message: '登录失败，请重试',
+            iconClass: 'icon icon-error'
+          })
         })
       }
     }
@@ -69,6 +65,16 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import '../../normal/stylus/normal'
+  .icon
+    height: 50px
+    width: 50px
+    margin: 0 auto
+    background-size: 50px
+    background-repeat: no-repeat
+    &.icon-success
+      background-image: url(../../assets/success.png)
+    &.icon-error
+      background-image: url(../../assets/error.png)
   .login
     margin: 100px 20px 20px
     .main

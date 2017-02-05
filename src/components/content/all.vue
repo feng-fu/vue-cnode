@@ -4,11 +4,9 @@
       <router-link tag="div" to="/dialog" slot="left">
         <mt-button icon="more"></mt-button>
       </router-link>
-      <router-link tag="div" to="/person" slot="right">
-        <mt-button>
-          <img src="../../assets/head.png" alt="head" width="24px">
-        </mt-button>
-      </router-link>
+      <mt-button @click="personCenter" slot="right">
+        <img src="../../assets/head.png" alt="head" width="24px">
+      </mt-button>
     </mt-header>
     <ul v-if='message'>
       <router-link tag='li' :to="'/topic/:'+item.id" v-for='item in message'>
@@ -36,6 +34,8 @@
 
 <script>
   import Utils from '../../libs/utils'
+  import Store from '../../store/store'
+  let store = Store.store
   export default {
     data () {
       return {
@@ -100,6 +100,15 @@
           console.log(error)
           this.showloadMore = -1
         })
+      },
+      personCenter () {
+        let state = store.getters.getLoginState
+        if (state.loginState === false) {
+          this.$router.push('/login')
+          return
+        } else {
+          this.$router.push('/person')
+        }
       }
     }
   }

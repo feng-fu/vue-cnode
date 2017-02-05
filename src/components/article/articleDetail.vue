@@ -31,10 +31,10 @@
       </ul>
     </div>
     <div class="bottom">
-      <mt-field placeholder="请留下您的评论...">
+      <mt-field placeholder="请留下您的评论..." v-model="comment">
         <img src="../../assets/pen.png" height="45px" width="45px" slot="left">
       </mt-field>
-      <mt-button type="default">提交</mt-button>
+      <mt-button type="default" @click="submit">提交</mt-button>
     </div>
   </div>
 </template>
@@ -42,11 +42,15 @@
 <script>
   import marked from 'marked'
   import Utils from '../../libs/utils'
+  import { MessageBox } from 'mint-ui'
+  import Store from '../../store/store'
+  const store = Store.store
   export default {
     data () {
       return {
         content: [],
-        click_good: false
+        click_good: [],
+        comment: ''
       }
     },
     created () {
@@ -54,6 +58,9 @@
         response = response.data
         if (response.success === true) {
           this.content = response.data
+          for (let i = 0; i < this.content.replies.length; i++) {
+            this.click_good.push(false)
+          }
         }
       }).catch(function (error) {
         console.log(error)
@@ -80,8 +87,39 @@
         return Utils.getIntervalTime(date)
       },
       addGood () {
-        this.click_good = true
-        console.log(this)
+//        让二者一一对应
+        this.click_good = !this.click_good
+      },
+
+      judgeLoginState () {
+        MessageBox.confirm('尚未登陆，现在就去?').then(action => {
+          this.$router.push('/login')
+        }).catch(() => { return })
+      },
+      submit () {
+//        提交评论 1. 判断是否已经登陆 2. 登陆则提交 3. 未登陆弹窗提示，是否去登陆
+        let loginState = store.getters.getLoginState
+        if (loginState.loginState === false) {
+          this.judgeLoginState()
+        } else {
+          if (this.comment === '') {
+            MessageBox.alert('请输入评论内容')
+          } else {
+            let path = window.location.hash.replace('#', '').replace(':', '')
+            this.axios.post('https://cnodejs.org/api/v1' + path + '/replies', {
+              accesstoken: loginState.accessToken,
+              content: this.comment
+            }).then((response) => {
+              response = response.data
+              console.log(response)
+              if (response.success === true) {
+                window.location.reload()
+              }
+            }).catch((error) => {
+              console.log(error)
+            })
+          }
+        }
       }
     }
   }
@@ -138,7 +176,7 @@
             height: 20px
             float: right
             &.click_good
-              background-url: url(../../assets/good_active.png)
+              background-image: url(../../assets/good_active.png)
     .author
       margin: 10px
       img
