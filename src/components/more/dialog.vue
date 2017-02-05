@@ -27,7 +27,7 @@
       </mt-cell>
     </ul>
     <div class="loginstate">
-      <mt-button type="danger" v-if="state" @click="quitLogin">
+      <mt-button type="danger" v-if="getLoginState" @click="quitLogin">
         <img slot="icon" src="../../assets/quit.png" width="20" height="20">
         退出
       </mt-button>
@@ -44,16 +44,23 @@
 </template>
 
 <script>
-
+  import Store from '../../store/store'
+  const store = Store.store
   export default {
     data () {
       return {
         state: false
       }
     },
+    computed: {
+      getLoginState () {
+        console.log(store.getters.getLoginState)
+        return store.getters.getLoginState.loginState
+      }
+    },
     methods: {
       quitLogin () {
-        console.log(1)
+        store.commit('loginOut')
       }
     }
   }

@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import Store from '../../store/store'
+  var store = Store.store
   export default {
     data () {
       return {
@@ -32,11 +34,16 @@
     },
     methods: {
       login () {
+        console.log(Store)
         this.axios.post('https://cnodejs.org/api/v1/accesstoken', {
           accesstoken: this.accessToken
         }).then((response) => {
           response = response.data
           if (response.success === true) {
+            let loginsname = response.loginname
+            store.commit('loginIn')
+            store.commit('storeAccessToken', this.accessToken)
+            store.commit('storeUserName', loginsname)
             this.state = 'success'
             this.loginResult = '登录成功'
             this.popupVisible = true

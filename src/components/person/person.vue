@@ -39,6 +39,8 @@
 
 <script>
   import Utils from '../../libs/utils'
+  import Store from '../../store/store'
+  const store = Store.store
   export default {
     data () {
       return {
@@ -52,7 +54,8 @@
       }
     },
     created () {
-      this.axios.get('https://cnodejs.org/api/v1/user/jingsam').then((response) => {
+      let usr = store.getters.getLoginState.userName
+      this.axios.get('https://cnodejs.org/api/v1/user/' + usr).then((response) => {
         response = response.data
         if (response.success === true) {
           console.log(response.data)

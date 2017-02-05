@@ -26,6 +26,11 @@
         </div>
       </router-link>
     </ul>
+    <div class="load_more" v-show="firstLoading">
+      <div v-if="showloadMore === 1" @click="loadMore">加载更多</div>
+      <div v-else-if="showloadMore === -1">加载失败</div>
+      <div v-else><img src="../../assets/ring.gif" alt="loading"></div>
+    </div>
   </div>
 </template>
 
@@ -34,20 +39,25 @@
   export default {
     data () {
       return {
-        message: []
+        message: [],
+        page: 1,
+        category: '',
+        showloadMore: 1,
+        firstLoading: false
       }
     },
     created () {
-      let page = 1
-      let category = ''
       if (this.$route.params.id) {
-        category = '&tab=' + this.$route.params.id.substr(1)
+        this.category = '&tab=' + this.$route.params.id.substr(1)
       }
-      this.axios.get('https://cnodejs.org/api/v1/topics' + '?limit=20&page=' + page + category).then((response) => {
-        page++
+      this.axios.get('https://cnodejs.org/api/v1/topics' + '?limit=20&page=' + this.page + this.category).then((response) => {
         response = response.data
+        this.page++
         if (response.success === true) {
-          this.message = response.data
+          for (let i = 0; i < response.data.length; i++) {
+            this.message.push(response.data[i])
+          }
+          this.firstLoading = true
         }
       }).catch(function (error) {
         console.log(error)
@@ -74,6 +84,22 @@
       },
       getRecentTime (date) {
         return Utils.getIntervalTime(date)
+      },
+      loadMore () {
+        this.showloadMore = 0
+        this.axios.get('https://cnodejs.org/api/v1/topics' + '?limit=20&page=' + this.page + this.category).then((response) => {
+          response = response.data
+          this.page++
+          if (response.success === true) {
+            for (let i = 0; i < response.data.length; i++) {
+              this.message.push(response.data[i])
+            }
+            this.showloadMore = 1
+          }
+        }).catch(function (error) {
+          console.log(error)
+          this.showloadMore = -1
+        })
       }
     }
   }
@@ -126,6 +152,17 @@
               background-image: url(../../assets/view.png)
             &.reply
               background-image: url(../../assets/reply.png)
-
-
+    .load_more
+      width: 100px
+      margin: 10px auto
+      text-align: center
+      lh-height(40px)
+      border: 1px solid #f0f0f0
+      border-radius: 10px
+      background-color: #26a2ff
+      color: #f0f0f0
+      img
+        height: 30px
+        padding-top: 5px
+        padding-bottom: 5px
 </style>

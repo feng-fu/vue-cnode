@@ -13,11 +13,14 @@ import articleDetail from 'components/article/articleDetail'
 import Dialog from 'components/more/dialog'
 import Login from 'components/login/login'
 import Person from 'components/person/person'
+import Store from './store/store'
 import './libs/style.css'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
 Vue.use(MintUi)
+
+console.log(Store)
 
 const routes = [
   {
