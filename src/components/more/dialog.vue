@@ -37,8 +37,6 @@
           登录
         </mt-button>
       </router-link>
-
-
     </div>
   </div>
 </template>
@@ -54,7 +52,6 @@
     },
     computed: {
       getLoginState () {
-        console.log(store.getters.getLoginState)
         return store.getters.getLoginState.loginState
       }
     },
