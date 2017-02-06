@@ -36,6 +36,7 @@
       </mt-field>
       <mt-button type="default" @click="submit">提交</mt-button>
     </div>
+    <Loading v-show="is_loading"></Loading>
   </div>
 </template>
 
@@ -44,16 +45,22 @@
   import Utils from '../../libs/utils'
   import { MessageBox } from 'mint-ui'
   import Store from '../../store/store'
+  import Loading from '../loading/loading'
   const store = Store.store
   export default {
     data () {
       return {
         content: [],
         click_good: [],
-        comment: ''
+        comment: '',
+        is_loading: false
       }
     },
+    components: {
+      Loading
+    },
     created () {
+      this.is_loading = true
       this.axios.get('https://cnodejs.org/api/v1/topic/' + this.$route.params.id.substr(1) + '?mdrender=false').then((response) => {
         response = response.data
         if (response.success === true) {
@@ -62,6 +69,7 @@
             this.click_good.push(false)
           }
         }
+        this.is_loading = false
       }).catch(function (error) {
         console.log(error)
       })
@@ -131,7 +139,7 @@
   .article
     padding: 60px 5px 20px
     background-color: #f8f8f9
-    min-height: 100%
+    min-height: 100vh
     margin-bottom: 40px
     img
       max-width: 100%

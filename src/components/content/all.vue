@@ -29,12 +29,14 @@
       <div v-else-if="showloadMore === -1">加载失败</div>
       <div v-else><img src="../../assets/ring.gif" alt="loading"></div>
     </div>
+    <Loading v-show="is_loading"></Loading>
   </div>
 </template>
 
 <script>
   import Utils from '../../libs/utils'
   import Store from '../../store/store'
+  import Loading from '../loading/loading'
   let store = Store.store
   export default {
     data () {
@@ -43,10 +45,15 @@
         page: 1,
         category: '',
         showloadMore: 1,
-        firstLoading: false
+        firstLoading: false,
+        is_loading: false
       }
     },
+    components: {
+      Loading
+    },
     created () {
+      this.is_loading = true
       if (this.$route.params.id) {
         this.category = '&tab=' + this.$route.params.id.substr(1)
       }
@@ -58,6 +65,7 @@
             this.message.push(response.data[i])
           }
           this.firstLoading = true
+          this.is_loading = false
         }
       }).catch(function (error) {
         console.log(error)

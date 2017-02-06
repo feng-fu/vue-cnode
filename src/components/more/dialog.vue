@@ -66,6 +66,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .dialog
     width: 100vw
+    height: 100vh
     .loginstate
       text-align: center
       margin: 30px

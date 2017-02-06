@@ -65,6 +65,15 @@ const router = new VueRouter({
   linkActiveClass: 'active',
   routes
 })
+// router.beforeEach((to, from, next) => {
+//   console.log(MintUi)
+//   MintUi.Indicator.open({
+//     text: 'Loading...',
+//     spinnerType: 'fading-circle'
+//   })
+//   next()
+//   MintUi.Indicator.close()
+// })
 
 /* eslint-disable no-new */
 new Vue({
