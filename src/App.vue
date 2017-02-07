@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition name="page-slide" mode="in-out">
+    <transition name="page-slide">
       <router-view keep-alive></router-view>
     </transition>
   </div>
@@ -19,14 +19,14 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .page-slide-enter-active {
-    transition: all .3s ease;
+    transition: all .5s ease;
   }
 
   .page-slide-leave-active {
-    transition: all .3s ease-out;
+    transition: all .5s ease-out;
   }
 
   .page-slide-enter, .page-slide-leave-active {
-    transform: translateY(100vh)
+    transform: translateX(-100vw)
   }
 </style>
