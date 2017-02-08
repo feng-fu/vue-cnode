@@ -16,7 +16,7 @@ exports.getIntervalTime = (time) => {
   var year = nowYear - Number(time.substr(0, 4))
   var month = nowMonth - Number(time.substr(5, 2))
   var date = nowDate - Number(time.substr(8, 2))
-  var hour = nowHour - Number(time.substr(11, 2))
+  var hour = nowHour - Number(time.substr(11, 2)) - 8
   var min = nowMin - Number(time.substr(14, 2))
   var sec = nowSec - Number(time.substr(18, 2))
   var timesec = year * 365 * 24 * 60 * 60 + month * 30 * 24 * 60 * 60 + date * 24 * 60 * 60 + hour * 60 * 60 + min * 60 + sec

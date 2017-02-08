@@ -116,7 +116,7 @@
             let path = window.location.hash.replace('#', '').replace(':', '')
             this.axios.post('https://cnodejs.org/api/v1' + path + '/replies', {
               accesstoken: loginState.accessToken,
-              content: this.comment
+              content: this.comment + ' 来自[vue-cnode](https://github.com/feng-fu/vue-cnode)'
             }).then((response) => {
               response = response.data
               console.log(response)

@@ -33,11 +33,15 @@
     text-align: center
     .content
       margin-bottom: 30px
+      h3
+        font-size: 24px
+      h4
+        font-size: 18px
       ul
         li
           height: 40px
           line-height: 40px
-          list-style: dotted
+          list-style: disc
           a
             color: #f00
 </style>

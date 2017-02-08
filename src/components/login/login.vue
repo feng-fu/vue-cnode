@@ -35,16 +35,13 @@
     },
     methods: {
       login () {
-        console.log(this.MintUi)
         this.axios.post('https://cnodejs.org/api/v1/accesstoken', {
           accesstoken: this.accessToken
         }).then((response) => {
           response = response.data
           if (response.success === true) {
             let loginsname = response.loginname
-            store.commit('loginIn')
-            store.commit('storeAccessToken', this.accessToken)
-            store.commit('storeUserName', loginsname)
+            store.commit('loginIn', {accessToken: this.accessToken, loginname: loginsname})
             Toast({
               message: '登录成功',
               iconClass: 'icon icon-success'
