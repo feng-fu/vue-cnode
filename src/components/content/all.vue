@@ -31,7 +31,7 @@
     <div class="load_more" v-show="firstLoading">
       <div v-if="showloadMore === 1">加载更多</div>
       <div v-else-if="showloadMore === -1">加载失败</div>
-      <div v-else><img src="../../assets/ring.gif" alt="loading"></div>
+      <div v-else class="loading_gif"></div>
     </div>
     <Loading v-show="is_loading"></Loading>
     <div class="return_top" @click="returnTop" v-show="show_return"></div>
@@ -232,8 +232,12 @@
       border-radius: 10px
       background-color: #26a2ff
       color: #f0f0f0
-      img
+      .loading_gif
+        background-image: url(../../assets/ring.gif)
         height: 30px
+        background-size: auto 50px
+        background-repeat: no-repeat
         padding-top: 5px
         padding-bottom: 5px
+        background-position: 25px -5px
 </style>
