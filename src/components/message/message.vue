@@ -59,12 +59,8 @@
     },
     created () {
       this.loading = true
-      let state = store.getters.getLoginState
-      if (state.loginState === false) {
-        this.$router.push('/login')
-        return
-      }
       let token = store.getters.getLoginState.accessToken
+      console.log(token)
       this.axios.get('https://cnodejs.org/api/v1/messages?accesstoken=' + token).then(res => {
         res = res.data
         if (res.success === true) {

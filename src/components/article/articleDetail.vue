@@ -23,7 +23,7 @@
               <span class="author_name">{{item.author.loginname}}</span>
               <span class="show_time" v-if="item.create_at">{{getRecentDate(item.create_at)}}</span>
             </div>
-            <div class="good" :class="{click_good:click_good}" @click="addGood"></div>
+            <div class="good" @click="addGood" :data-id="item.id"></div>
           </div>
           <div class="replies-msg markdown-body" v-html='renderMarkdown(item.content)'>
           </div>
@@ -47,11 +47,12 @@
   import Store from '../../store/store'
   import Loading from '../loading/loading'
   const store = Store.store
+  const path = window.location.hash.replace('#', '').replace(':', '').replace('topic/', '')
+  const loginState = store.getters.getLoginState
   export default {
     data () {
       return {
         content: [],
-        click_good: [],
         comment: '',
         is_loading: false
       }
@@ -60,14 +61,13 @@
       Loading
     },
     created () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
       this.is_loading = true
       this.axios.get('https://cnodejs.org/api/v1/topic/' + this.$route.params.id.substr(1) + '?mdrender=false').then((response) => {
         response = response.data
         if (response.success === true) {
           this.content = response.data
-          for (let i = 0; i < this.content.replies.length; i++) {
-            this.click_good.push(false)
-          }
         }
         this.is_loading = false
       }).catch(function (error) {
@@ -94,11 +94,24 @@
       getRecentDate (date) {
         return Utils.getIntervalTime(date)
       },
-      addGood () {
+      addGood (event) {
+        let id = event.target.dataset.id
+        this.axios.post('https://cnodejs.org/api/v1/reply/' + id + '/ups', {
+          accesstoken: loginState.accessToken
+        }).then((res) => {
+          res = res.data
+          if (res.success) {
+            if (res.action === 'up') {
+              event.target.className = 'good click_good'
+            } else {
+              event.target.className = 'good'
+            }
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
 //        让二者一一对应
-        this.click_good = !this.click_good
       },
-
       judgeLoginState () {
         MessageBox.confirm('尚未登陆，现在就去?').then(action => {
           this.$router.push('/login')
@@ -106,15 +119,13 @@
       },
       submit () {
 //        提交评论 1. 判断是否已经登陆 2. 登陆则提交 3. 未登陆弹窗提示，是否去登陆
-        let loginState = store.getters.getLoginState
         if (loginState.loginState === false) {
           this.judgeLoginState()
         } else {
           if (this.comment === '') {
             MessageBox.alert('请输入评论内容')
           } else {
-            let path = window.location.hash.replace('#', '').replace(':', '')
-            this.axios.post('https://cnodejs.org/api/v1' + path + '/replies', {
+            this.axios.post('https://cnodejs.org/api/v1/topic' + path + '/replies', {
               accesstoken: loginState.accessToken,
               content: this.comment + ' 来自[vue-cnode](https://github.com/feng-fu/vue-cnode)'
             }).then((response) => {

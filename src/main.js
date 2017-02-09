@@ -15,6 +15,7 @@ import Login from 'components/login/login'
 import Person from 'components/person/person'
 import Store from './store/store'
 import './libs/style.css'
+const store = Store.store
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
@@ -33,7 +34,14 @@ const routes = [
   },
   {
     path: '/message',
-    component: message
+    component: message,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.getLoginState.loginState) {
+        next()
+      } else {
+        next({ path: '/login' })
+      }
+    }
   },
   {
     path: '/about',

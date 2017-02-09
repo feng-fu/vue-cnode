@@ -30,6 +30,7 @@
           </router-link>
         </li>
       </ul>
+      <div class="no_data">暂无更多动态</div>
     </div>
     <div v-else>
 
@@ -116,4 +117,9 @@
           lh-height: 40px
           &.last_repl
             float: right
+      .no_data
+        width: 100%
+        text-align: center
+        height: 40px
+        line-height: 40px
 </style>
