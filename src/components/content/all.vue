@@ -8,7 +8,10 @@
         <img src="../../assets/head.png" alt="head" width="24px">
       </mt-button>
     </mt-header>
-    <ul v-if='message'>
+    <mt-loadmore :top-method="loadTop" ref="loadmore">
+    <ul v-if='message' v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10">
       <router-link tag='li' :to="'/topic/:'+item.id" v-for='item in message'>
         <div class="title clearfix">
           <img :src="item.author.avatar_url" alt="avatar">
@@ -24,12 +27,14 @@
         </div>
       </router-link>
     </ul>
+    </mt-loadmore>
     <div class="load_more" v-show="firstLoading">
-      <div v-if="showloadMore === 1" @click="loadMore">加载更多</div>
+      <div v-if="showloadMore === 1">加载更多</div>
       <div v-else-if="showloadMore === -1">加载失败</div>
       <div v-else><img src="../../assets/ring.gif" alt="loading"></div>
     </div>
     <Loading v-show="is_loading"></Loading>
+    <div class="return_top" @click="returnTop" v-show="show_return"></div>
   </div>
 </template>
 
@@ -46,7 +51,8 @@
         category: '',
         showloadMore: 1,
         firstLoading: false,
-        is_loading: false
+        is_loading: false,
+        show_return: false
       }
     },
     components: {
@@ -71,6 +77,9 @@
         console.log(error)
       })
     },
+    mounted () {
+      document.onscroll = this.toggleReturnTopState
+    },
     methods: {
       getTheme (id) {
         if (id === undefined) {
@@ -93,6 +102,31 @@
       getRecentTime (date) {
         return Utils.getIntervalTime(date)
       },
+      toggleReturnTopState () {
+        if (document.body.scrollTop > 1000) {
+          this.show_return = true
+        } else {
+          this.show_return = false
+        }
+      },
+      loadTop () {
+        this.page = 1
+        this.is_loading = true
+        this.axios.get('https://cnodejs.org/api/v1/topics' + '?limit=20&page=' + this.page + this.category).then((response) => {
+          response = response.data
+          this.page++
+          if (response.success === true) {
+            this.message = []
+            for (let i = 0; i < response.data.length; i++) {
+              this.message.push(response.data[i])
+            }
+            this.$refs.loadmore.onTopLoaded()
+            this.is_loading = false
+          }
+        }).catch(function (error) {
+          console.log(error)
+        })
+      },
       loadMore () {
         this.showloadMore = 0
         this.axios.get('https://cnodejs.org/api/v1/topics' + '?limit=20&page=' + this.page + this.category).then((response) => {
@@ -111,12 +145,16 @@
       },
       personCenter () {
         let state = store.getters.getLoginState
-        if (state.loginState === false) {
+        if (!state.loginState) {
           this.$router.push('/login')
           return
         } else {
           this.$router.push('/person')
         }
+      },
+      returnTop () {
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
       }
     }
   }
@@ -126,6 +164,22 @@
   @import '../../normal/stylus/normal'
   .all
     margin-top: 40px
+    .return_top
+      background-image: url(../../assets/to_top.png)
+      width: 20px
+      height: 20px
+      padding: 5px
+      box-sizing: content-box
+      border-radius: 50%
+      background-color: #199af5
+      background-position: 5px 4px
+      background-size: 20px
+      position: fixed
+      bottom: 10px
+      right: 10px
+      background-repeat: no-repeat
+      &:hover
+        background-color: #3295ff
     li
       width: 100%
       box-sizing: border-box

@@ -21,8 +21,6 @@ Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
 Vue.use(MintUi)
 
-console.log(Store)
-
 const routes = [
   {
     path: '/',
@@ -71,18 +69,11 @@ const routes = [
 
 const router = new VueRouter({
   linkActiveClass: 'active',
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
-// router.beforeEach((to, from, next) => {
-//   console.log(MintUi)
-//   MintUi.Indicator.open({
-//     text: 'Loading...',
-//     spinnerType: 'fading-circle'
-//   })
-//   next()
-//   MintUi.Indicator.close()
-// })
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

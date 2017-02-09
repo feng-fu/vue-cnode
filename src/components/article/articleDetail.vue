@@ -95,21 +95,25 @@
         return Utils.getIntervalTime(date)
       },
       addGood (event) {
-        let id = event.target.dataset.id
-        this.axios.post('https://cnodejs.org/api/v1/reply/' + id + '/ups', {
-          accesstoken: loginState.accessToken
-        }).then((res) => {
-          res = res.data
-          if (res.success) {
-            if (res.action === 'up') {
-              event.target.className = 'good click_good'
-            } else {
-              event.target.className = 'good'
+        if (!loginState.loginState) {
+          this.judgeLoginState()
+        } else {
+          let id = event.target.dataset.id
+          this.axios.post('https://cnodejs.org/api/v1/reply/' + id + '/ups', {
+            accesstoken: loginState.accessToken
+          }).then((res) => {
+            res = res.data
+            if (res.success) {
+              if (res.action === 'up') {
+                event.target.className = 'good click_good'
+              } else {
+                event.target.className = 'good'
+              }
             }
-          }
-        }).catch((err) => {
-          console.log(err)
-        })
+          }).catch((err) => {
+            console.log(err)
+          })
+        }
 //        让二者一一对应
       },
       judgeLoginState () {
@@ -119,7 +123,8 @@
       },
       submit () {
 //        提交评论 1. 判断是否已经登陆 2. 登陆则提交 3. 未登陆弹窗提示，是否去登陆
-        if (loginState.loginState === false) {
+        console.log(loginState.loginState)
+        if (!loginState.loginState) {
           this.judgeLoginState()
         } else {
           if (this.comment === '') {
