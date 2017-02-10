@@ -47,14 +47,13 @@
   import Store from '../../store/store'
   import Loading from '../loading/loading'
   const store = Store.store
-  const path = window.location.hash.replace('#', '').replace(':', '').replace('topic/', '')
-  const loginState = store.getters.getLoginState
   export default {
     data () {
       return {
         content: [],
         comment: '',
-        is_loading: false
+        is_loading: false,
+        loginState: {}
       }
     },
     components: {
@@ -69,10 +68,14 @@
         if (response.success === true) {
           this.content = response.data
         }
+
         this.is_loading = false
       }).catch(function (error) {
         console.log(error)
       })
+    },
+    mounted () {
+      this.loginState = store.getters.getLoginState
     },
     methods: {
       renderMarkdown (input) {
@@ -95,12 +98,13 @@
         return Utils.getIntervalTime(date)
       },
       addGood (event) {
-        if (!loginState.loginState) {
+        console.log(this.loginState)
+        if (!this.loginState.loginState) {
           this.judgeLoginState()
         } else {
           let id = event.target.dataset.id
           this.axios.post('https://cnodejs.org/api/v1/reply/' + id + '/ups', {
-            accesstoken: loginState.accessToken
+            accesstoken: this.loginState.accessToken
           }).then((res) => {
             res = res.data
             if (res.success) {
@@ -111,6 +115,9 @@
               }
             }
           }).catch((err) => {
+            if (err.response.status === 403) {
+              MessageBox.alert('你好像不能给自己点赞哦')
+            }
             console.log(err)
           })
         }
@@ -123,15 +130,16 @@
       },
       submit () {
 //        提交评论 1. 判断是否已经登陆 2. 登陆则提交 3. 未登陆弹窗提示，是否去登陆
-        console.log(loginState.loginState)
-        if (!loginState.loginState) {
+        console.log(this.loginState)
+        if (!this.loginState.loginState) {
           this.judgeLoginState()
         } else {
           if (this.comment === '') {
             MessageBox.alert('请输入评论内容')
           } else {
-            this.axios.post('https://cnodejs.org/api/v1/topic' + path + '/replies', {
-              accesstoken: loginState.accessToken,
+            const path = window.location.hash.replace('#', '').replace(':', '')
+            this.axios.post('https://cnodejs.org/api/v1' + path + '/replies', {
+              accesstoken: this.loginState.accessToken,
               content: this.comment + ' 来自[vue-cnode](https://github.com/feng-fu/vue-cnode)'
             }).then((response) => {
               response = response.data

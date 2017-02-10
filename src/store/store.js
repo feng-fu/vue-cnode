@@ -28,6 +28,8 @@ const store = new Vuex.Store({
   mutations: {
     loginIn (state, reload) {
       state.loginState = true
+      state.accessToken = reload.accessToken
+      state.userName = reload.loginname
       local.setLocalItem(true, reload.accessToken, reload.loginname)
     },
     loginOut (state) {

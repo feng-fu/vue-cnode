@@ -111,7 +111,6 @@
       },
       loadTop () {
         this.page = 1
-        this.is_loading = true
         this.axios.get('https://cnodejs.org/api/v1/topics' + '?limit=20&page=' + this.page + this.category).then((response) => {
           response = response.data
           this.page++
@@ -121,7 +120,6 @@
               this.message.push(response.data[i])
             }
             this.$refs.loadmore.onTopLoaded()
-            this.is_loading = false
           }
         }).catch(function (error) {
           console.log(error)
