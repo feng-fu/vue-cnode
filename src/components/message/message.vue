@@ -6,6 +6,7 @@
     <div class="tab">
       <div class="read" :class="{active:in_read}" @click="toggleHasRead">已读消息</div>
       <div class="notread" :class="{active:in_not_read}" @click="toggleNotRead">未读消息</div>
+      <div class="collect" :class="{active:in_collect}" @click="toggleCollect">我的收藏</div>
     </div>
     <div class="content" v-if="hasBoth(content.has_read_messages,content.hasnot_read_messages)">
       <ul class="hasread" v-if="in_read">
@@ -22,7 +23,7 @@
         <div class="no_data" v-show="content.has_read_messages.length === 0">暂无~~~</div>
       </ul>
       <ul class="hasnotread" v-if="in_not_read">
-        <router-link tag="li" to="'/topic/:'+item.topic.id" v-for="item in content.has_notread_messages">
+        <router-link tag="li" :to="'/topic/:'+item.topic.id" v-for="item in content.has_notread_messages">
           <div class="relative">
             <div class="reply_title ellipse">{{item.topic.title}}</div><div class="time" v-text="getRecentTime(item.topic.last_reply_at)"></div>
           </div>
@@ -33,6 +34,23 @@
           <div class="to"></div>
         </router-link>
         <div class="no_data" v-show="content.hasnot_read_messages.length === 0">暂无~~~</div>
+      </ul>
+      <ul class="hascollect" v-if="in_collect">
+        <router-link tag="li" v-for="item in collect" :to="'/topic/:'+item.id">
+          <div class="title clearfix">
+            <img :src="item.author.avatar_url" alt="avatar">
+            <span>{{item.author.loginname}}</span>
+            <span class="date">{{getRecentTime(item.create_at)}}</span>
+          </div>
+          <div class="detail">
+            {{item.title}}
+          </div>
+          <div class="operate clearfix">
+            <span class="view icon lside"></span><span class="view_text lside">{{item.visit_count}}</span>
+            <span class="reply icon lside"></span><span class="reply_text lside">{{item.reply_count}}</span>
+          </div>
+        </router-link>
+        <div class="no_data" v-show="collect.length === 0">暂无~~~</div>
       </ul>
     </div>
     <Loading v-show="loading"></Loading>
@@ -51,7 +69,9 @@
         selected: 0,
         in_not_read: false,
         in_read: true,
-        loading: false
+        loading: false,
+        in_collect: false,
+        collect: []
       }
     },
     components: {
@@ -59,9 +79,8 @@
     },
     created () {
       this.loading = true
-      let token = store.getters.getLoginState.accessToken
-      console.log(token)
-      this.axios.get('https://cnodejs.org/api/v1/messages?accesstoken=' + token).then(res => {
+      let token = store.getters.getLoginState
+      this.axios.get('https://cnodejs.org/api/v1/messages?accesstoken=' + token.accessToken).then(res => {
         res = res.data
         if (res.success === true) {
           this.content = res.data
@@ -72,15 +91,30 @@
       }).catch(err => {
         console.log(err)
       })
+      this.axios.get('https://cnodejs.org/api/v1/topic_collect/' + token.userName).then(res => {
+        res = res.data
+        if (res.success) {
+          this.collect = res.data
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     },
     methods: {
       toggleNotRead () {
         this.in_read = false
         this.in_not_read = true
+        this.in_collect = false
+      },
+      toggleCollect () {
+        this.in_collect = true
+        this.in_read = false
+        this.in_not_read = false
       },
       toggleHasRead () {
         this.in_read = true
         this.in_not_read = false
+        this.in_collect = false
       },
       getRecentTime (time) {
         return Utils.getIntervalTime(time)
@@ -93,6 +127,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import '../../normal/stylus/normal'
   .message
     .relative
       position: relative
@@ -159,5 +194,49 @@
       .hasnotread
         li
           background-image: url(../../assets/wait_read.png)
+      .hascollect
+        li
+          width: 100%
+          box-sizing: border-box
+          padding: 0 10px
+          height: 110px
+          border-npx(1px,#ccc)
+          .title
+            img
+              width: 30px
+              height: 30px
+              margin: 5px
+              border-radius: 50%
+              float: left
+            span
+              display: block
+              float: left
+              margin: 0 10px
+              lh-height(40px)
+              color: #333;
+              &.date
+                color: #969696
+          .detail
+            display: block
+            ellipsis(100%)
+            lh-height(40px)
+            font-size: 14px
+          .operate
+            margin: 0 5px
+            span
+              display: inline-block
+              lh-height(25px)
+              color: #bfbfbf
+              &.lside
+                float: left
+                margin-right: 10px
+              &.icon
+                width: 25px
+                background-size: 25px
+                background-repeat: no-repeat
+                &.view
+                  background-image: url(../../assets/view.png)
+                &.reply
+                  background-image: url(../../assets/reply.png)
 
 </style>

@@ -13,6 +13,7 @@ import articleDetail from 'components/article/articleDetail'
 import Dialog from 'components/more/dialog'
 import Login from 'components/login/login'
 import Person from 'components/person/person'
+import Publish from 'components/publish/publish'
 import Store from './store/store'
 import './libs/style.css'
 const store = Store.store
@@ -33,6 +34,17 @@ const routes = [
   {
     path: '/message',
     component: message,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.getLoginState.loginState) {
+        next()
+      } else {
+        next({ path: '/login' })
+      }
+    }
+  },
+  {
+    path: '/publish',
+    component: Publish,
     beforeEnter: (to, from, next) => {
       if (store.getters.getLoginState.loginState) {
         next()

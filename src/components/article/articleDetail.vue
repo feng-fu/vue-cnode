@@ -10,6 +10,7 @@
       <img :src="content.author.avatar_url" alt="avatar">
       <span class="name">{{content.author.loginname}}</span>
       <span class="editor">作者</span>
+      <span class="star" @click="addStar"></span>
     </div>
     <div class="publish_time" v-if="content.create_at">发表于：{{getChineseDate(content.create_at)}}</div>
     <div class="markdown-body content" v-if="content.content" v-html='renderMarkdown(content.content)'></div>
@@ -47,6 +48,7 @@
   import Store from '../../store/store'
   import Loading from '../loading/loading'
   const store = Store.store
+  const topicId = window.location.hash.replace('#', '').replace(':', '').replace('/topic/', '')
   export default {
     data () {
       return {
@@ -98,7 +100,6 @@
         return Utils.getIntervalTime(date)
       },
       addGood (event) {
-        console.log(this.loginState)
         if (!this.loginState.loginState) {
           this.judgeLoginState()
         } else {
@@ -152,6 +153,31 @@
             })
           }
         }
+      },
+      addStar (event) {
+        event.target.className = 'star stared'
+        this.axios.post('https://cnodejs.org/api/v1/topic_collect/collect', {
+          accesstoken: this.loginState.accessToken,
+          topic_id: topicId
+        }).then((res) => {
+          res = res.data
+          if (!res.success) {
+            event.target.className = 'star'
+            this.cancelStar()
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
+      },
+      cancelStar () {
+        this.axios.post('https://cnodejs.org/api/v1/topic_collect/de_collect', {
+          accesstoken: this.loginState.accessToken,
+          topic_id: topicId
+        }).then((res) => {
+          console.log(res.data)
+        }).catch((err) => {
+          console.log(err)
+        })
       }
     }
   }
@@ -230,6 +256,19 @@
         padding: 2px
         margin: 6px
         border-radius: 3px
+      .star
+        display: block
+        float: right
+        width: 30px
+        height: 30px
+        background-size: 20px
+        background-position: 5px 5px
+        border-radius: 5px
+        background-color: #26a2ff
+        background-repeat: no-repeat
+        background-image: url(../../assets/add_star.png)
+        &.stared
+          background-image: url(../../assets/star.png)
     .publish_time
       margin-bottom: 20px
       padding-left: 15px

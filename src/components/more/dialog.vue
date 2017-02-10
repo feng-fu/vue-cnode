@@ -22,6 +22,9 @@
       <mt-cell title="消息" is-link to="/message">
         <img slot="icon" src="../../assets/msg.png" width="24" height="24">
       </mt-cell>
+      <mt-cell title="发帖" is-link to="/publish">
+        <img slot="icon" src="../../assets/publish.png" width="24" height="24">
+      </mt-cell>
       <mt-cell title="关于" is-link to="/about">
         <img slot="icon" src="../../assets/about.png" width="24" height="24">
       </mt-cell>

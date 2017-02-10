@@ -16,7 +16,6 @@
           <div class="name">{{userMessage.loginname}}</div>
           <div class="score">{{userMessage.score}}积分</div>
         </div>
-
       </div>
       <ul class="container" v-if="userMessage.recent_topics">
         <li v-for="item in userMessage.recent_topics">
