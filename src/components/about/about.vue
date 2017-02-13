@@ -13,6 +13,7 @@
     </div>
     <p>扫描二维码预览：</p>
     <img src="../../assets/ewm.png" alt="扫我">
+    <p>Android App <a href="http://fengfu.space/vue-cnode/android/package.apk" target="_blank">下载</a></p>
   </div>
 </template>
 

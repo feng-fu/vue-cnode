@@ -4,12 +4,12 @@
       <mt-button icon="back" @click='$router.go(-1)' slot="left"></mt-button>
     </mt-header>
     <mt-field label="标题" placeholder="标题" type="text" v-model="title" @keyup.enter="titleInputCheck" :state="titleState"></mt-field>
-    <mt-radio
-      title="选择分类"
-      v-model="category"
-      align="right"
-      :options="['ask', 'job', 'share']">
-    </mt-radio>
+    <label class="select_category" for="">选择分类 </label>
+    <select v-model="category">
+      <option>ask</option>
+      <option>job</option>
+      <option>share</option>
+    </select>
     <mt-field label="内容" placeholder="请输入内容，支持markdown语法" type="textarea" rows="10" v-model="content"></mt-field>
     <mt-button type="primary" size="large" @click="publishTheme">发布</mt-button>
   </div>
@@ -85,4 +85,18 @@
 <style lang="stylus" rel="stylesheet/stylus">
   .publish
     margin-top: 50px
+    select
+      width: 150px
+      height: 30px
+      border-radius: 3px
+      margin-left: 36px
+      option
+        text-align: center
+    button
+      margin-top: 20px
+    textarea,input
+      border: 1px solid #ccc
+      border-radius: 3px
+    .select_category
+      padding-left: 10px
 </style>

@@ -16,6 +16,9 @@
 > * 回帖，顶帖        √
 > * 待续
 
+
+已打包称android app [点击下载](http://fengfu.space/vue-cnode/android/package.apk)
+
 ## Build Setup
 
 ``` bash
@@ -27,7 +30,8 @@ npm run dev
 
 # build for production with minification
 npm run build
-因为需要打包Android App，所以对build做了些修改，变成了相对路径的方式如需build，请将build所生成的处于根目录下的img文件夹复制入dist中的static文件夹内，双击打开index.html文件即可
+cd dist
+open index.html in a server.
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
