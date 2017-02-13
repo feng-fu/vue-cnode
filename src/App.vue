@@ -27,6 +27,6 @@
   }
 
   .page-slide-enter, .page-slide-leave-active {
-    transform: translateX(-100vw)
+    transform: translateX(-100vw);
   }
 </style>

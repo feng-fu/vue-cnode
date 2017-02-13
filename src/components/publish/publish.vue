@@ -3,7 +3,7 @@
     <mt-header fixed title="发布主题">
       <mt-button icon="back" @click='$router.go(-1)' slot="left"></mt-button>
     </mt-header>
-    <mt-field label="标题" placeholder="标题" type="text" v-model="title"></mt-field>
+    <mt-field label="标题" placeholder="标题" type="text" v-model="title" @keyup.enter="titleInputCheck" :state="titleState"></mt-field>
     <mt-radio
       title="选择分类"
       v-model="category"
@@ -17,33 +17,66 @@
 
 <script>
   import Store from '../../store/store'
+  import { MessageBox } from 'mint-ui'
   const store = Store.store
   export default {
     data () {
       return {
         title: '',
         category: '',
-        content: ''
+        content: '',
+        titleState: ''
       }
-    },
-    mounted () {
-
     },
     methods: {
       publishTheme () {
-        console.log(this.title, this.category, this.content)
+        console.log(this)
+        if (!this.checkContentSure()) {
+          return
+        }
         const state = store.getters.getLoginState
         console.log(state)
         this.axios.post('https://cnodejs.org/api/v1/topics', {
-          accessToken: state.accessToken,
+          accesstoken: state.accessToken,
           title: this.title,
           tab: this.category,
           content: this.content
         }).then((res) => {
-          console.log(res)
+          res = res.data
+          if (res.success) {
+            this.$router.push('/topic/:' + res.topic_id)
+          } else {
+            MessageBox.alert('发布失败')
+          }
         }).catch((err) => {
           console.log(err)
         })
+      },
+      titleInputCheck () {
+        console.log(this.titleState)
+        if (this.title.length < 10) {
+          this.titleState = 'error'
+        } else {
+          this.titleState = 'success'
+        }
+      },
+      checkContentSure () {
+        if (this.title.length > 10) {
+          if (this.category !== '') {
+            if (this.content !== '') {
+              return true
+            } else {
+              MessageBox.alert('请输入内容')
+              return false
+            }
+          } else {
+            MessageBox.alert('请选择分类')
+            return false
+          }
+        } else {
+          MessageBox.alert('标题长度不能少于10个字')
+          return false
+        }
       }
     }
   }
