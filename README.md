@@ -17,7 +17,7 @@
 > * 待续
 
 
-已打包称android app [点击下载](http://fengfu.space/vue-cnode/android/package.apk)
+已打包为android app [点击下载](http://fengfu.space/vue-cnode/android/package.apk)
 
 ## Build Setup
 
