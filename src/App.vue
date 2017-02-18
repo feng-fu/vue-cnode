@@ -19,14 +19,13 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .page-slide-enter-active {
-    transition: all .5s ease;
+    transition: all .3s ease;
   }
-
   .page-slide-leave-active {
-    transition: all .5s ease-out;
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
-
   .page-slide-enter, .page-slide-leave-active {
-    transform: translateX(-100vw);
+    transform: translateX(10px) translateY(-50px);
+    opacity: 0;
   }
 </style>
